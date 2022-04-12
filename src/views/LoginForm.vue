@@ -41,8 +41,8 @@
             })
             localStorage.setItem('token', response.data.token)
             this.$store.dispatch('user', response.data.user)
-            this.$router.push('/')
             location.reload()
+            this.$router.push('/')
              } catch (e){
                 this.error = 'Invalid username/password'
              }
