@@ -41,11 +41,7 @@
             })
             localStorage.setItem('token', response.data.token)
             this.$store.dispatch('user', response.data.user)
-            await this.$router.push('/').then(() => {
-                location.reload()
-            }).catch((err) => {
-                
-            });
+            await this.$router.push('/')
              } catch (e){
                 this.error = 'Invalid username/password'
              }
