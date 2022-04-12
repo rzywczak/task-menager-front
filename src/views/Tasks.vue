@@ -68,7 +68,8 @@ export default {
           description: this.description,
           user: this.user._id,
         });
-        location.reload()
+
+       this.loadTasks();
       } catch (e) {
         console.log("error");
       }
@@ -80,9 +81,9 @@ export default {
             Authorization: `Bearer ${localStorage.token}`,
           },
         });
-        location.reload()
+         this.loadTasks();
       } catch (e) {
-        console.log(e);
+          console.log("error");
       }
     },
   },
