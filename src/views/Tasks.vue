@@ -3,26 +3,29 @@
     <button class="btn btn-primary btn-block">loading...</button>
   </div>
   <div class="list-group" v-else>
+    <div id="inputANDbutton" class="d-flex flex-row">
     <input
       type="text"
-      class="form-control"
+      class="form-control p-2"
       v-model="description"
       placeholder="Task"
     />
-    <button type="button" class="btn btn-primary btn-block" @click="addTasks">
+    <button type="button" class="btn btn-primary btn-block p-2" @click="addTasks" >
       Add
     </button>
-    <ul>
-      <li
-        class="list-group-item list-group-item-action"
-        v-for="task in tasks"
+   </div>
+    <ul v-for="task in tasks"
         v-bind:key="task._id"
-        @click="deleteTask(task._id)"
+        @click="deleteTask(task._id)" 
+        class="d-flex flex-column">
+      <li
+        class="list-group-item list-group-item-action "
       >
         {{ task.description }}
 
       </li>
     </ul>
+     
   </div>
 </template>
 
@@ -39,7 +42,7 @@ export default {
     return {
       loading: false,
       tasks: [],
-      description: "",
+      description: '',
     };
   },
   created() {
@@ -59,7 +62,7 @@ export default {
         });
     },
     async addTasks() {
-      //   console.log(localStorage.token)
+        console.log(localStorage)
       try {
         await axios.post("tasks", {
           header: {
@@ -67,11 +70,10 @@ export default {
           },
           description: this.description,
           user: this.user._id,
-        });
-
-       this.loadTasks();
+        })
+        this.loadTasks();
       } catch (e) {
-        console.log("error");
+        console.log(e);
       }
     },
     async deleteTask(id) {
@@ -80,10 +82,10 @@ export default {
           header: {
             Authorization: `Bearer ${localStorage.token}`,
           },
-        });
-         this.loadTasks();
+        })
+        this.loadTasks();     
       } catch (e) {
-          console.log("error");
+          console.log(e);
       }
     },
   },
@@ -94,7 +96,11 @@ export default {
 li {
   font-size: 17px;
 }
-button {
-  padding: 15px;
+#inputANDbutton{
+  margin: 10px 0;
+}
+ul{
+  margin: 0;
+  padding: 0;
 }
 </style>

@@ -20,10 +20,13 @@
 <script>
  import axios from 'axios'
  import Error from './Error.vue'
+ import Tasks from './Tasks.vue'
+
  export default {
      name: 'Login',
      components: {
-         Error
+         Error,
+         Tasks
      },
      data(){
          return {
@@ -41,7 +44,11 @@
             })
             localStorage.setItem('token', response.data.token)
             this.$store.dispatch('user', response.data.user)
-            await this.$router.push('/')
+            await this.$router.push('/').then(() => {
+              location.reload()
+            }).catch((err) => {
+                console.log(err)
+            });
              } catch (e){
                 this.error = 'Invalid username/password'
              }
