@@ -43,7 +43,7 @@
             
             async handleSubmit(){
                 try {
-                const response = await axios.post('register', {
+                const response = await axios.post('users', {
                     name: this.name,
                     email: this.email,
                     password: this.password,
